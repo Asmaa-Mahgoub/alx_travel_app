@@ -22,20 +22,23 @@ env = environ.Env(
     DEBUG=(bool, False)
 )
 # Read .env file
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+#environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+PROJECT_ROOT = BASE_DIR.parent
+environ.Env.read_env(os.path.join(PROJECT_ROOT, '.env'))
 
-DEBUG = env('DEBUG')
-SECRET_KEY = env('SECRET_KEY')
+
+SECRET_KEY = env('SECRET_KEY', default='django-insecure-fallback-secret-key')
+DEBUG = env('DEBUG', default=True)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+""" # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-#tu*x_f(!0f*z0v@y8ylgd_yj_e$h1u9ke%hp=(%ao1lzq+e#_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True """
 
 ALLOWED_HOSTS = []
 
@@ -52,7 +55,7 @@ INSTALLED_APPS = [
     'rest_framework',       # Django REST Framework
     'corsheaders',          # CORS support
     'drf_yasg',             # Swagger documentation
-    'listings',  
+    'alx_travel_app.alx_travel_app.listings',  
 ]
 
 MIDDLEWARE = [
@@ -98,7 +101,7 @@ DATABASES = {
         'USER': env('DB_USER'),
         'PASSWORD': env('DB_PASSWORD'),
         'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
+        'PORT': env('DB_PORT', cast=int),
     }
 }
 
