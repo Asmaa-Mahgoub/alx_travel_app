@@ -71,7 +71,7 @@ MIDDLEWARE = [
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-ROOT_URLCONF = 'alx_travel_app.urls'
+ROOT_URLCONF = 'alx_travel_app.alx_travel_app.urls'
 
 TEMPLATES = [
     {
